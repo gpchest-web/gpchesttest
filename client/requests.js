@@ -55,6 +55,7 @@ export const createGoldPrice = async (form) => {
 export const getGoldPrices = async () => {
   try {
     const res = await axios.get(`${BASE_URL}/api/gold`);
+    console.log(`Gold api ${BASE_URL}/api/gold`)
     return res;
   } catch (err) {
     return err.response;
