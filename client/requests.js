@@ -53,9 +53,9 @@ export const createGoldPrice = async (form) => {
 };
 
 export const getGoldPrices = async () => {
-  console.log(`Gold api ${BASE_URL}/api/gold`)
+  
   try {
-    const res = await axios.get(`${BASE_URL}/api/gold`);
+    const res = await axios.get(`https://gpchesttest.vercel.app/api/gold`);
     return res;
   } catch (err) {
     return err.response;
