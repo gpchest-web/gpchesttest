@@ -8,6 +8,7 @@ import { getGoldPrices } from "../../../client/requests";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
+import axios from "axios"
 
 export default function GoldPrice({ goldPrices }) {
   console.log(`goldPrices ${goldPrices}`);
@@ -76,11 +77,20 @@ export default function GoldPrice({ goldPrices }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-  const goldRes = await getGoldPrices();
+   const BASE_URL = process.env.BASE_URL_PROD;
+  console.log(`res => ${BASE_URL}/api/gold`);
+  try {
+    const res = await axios.get(`${BASE_URL}/api/gold`);
+    console.log(`result ${res}`);
+  } catch(err) {
+    console.log(`Error => ${err}`)
+  }
+
   // console.log(`gold prices ${goldRes?.data}`);
   return {
     props: {
-      goldPrices: goldRes?.data ?? [],
+      // goldPrices: goldRes?.data ?? [],
+      goldPrices: [],
     },
   };
 }
