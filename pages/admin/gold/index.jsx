@@ -80,17 +80,16 @@ export async function getServerSideProps({ req, res }) {
    const BASE_URL = process.env.BASE_URL_PROD;
   console.log(`res => https://${BASE_URL}/api/gold`);
   try {
-    const res = await axios.get(`https://${BASE_URL}/api/gold`);
+    const goldRes = await axios.get(`https://${BASE_URL}/api/gold`);
     console.log(`result ${res}`);
   } catch(err) {
     console.log(`Error => ${err}`)
   }
 
-  // console.log(`gold prices ${goldRes?.data}`);
+  
   return {
     props: {
-      // goldPrices: goldRes?.data ?? [],
-      goldPrices: [],
+      goldPrices: goldRes?.data ?? [],
     },
   };
 }
