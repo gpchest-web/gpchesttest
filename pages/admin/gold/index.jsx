@@ -77,15 +77,17 @@ export default function GoldPrice({ goldPrices }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-   const BASE_URL = process.env.BASE_URL_PROD;
-  console.log(`res => https://${BASE_URL}/api/gold`);
-  let goldRes;
-  try {
-    goldRes = await axios.get(`https://${BASE_URL}/api/gold`);
-    console.log(`result ${res}`);
-  } catch(err) {
-    console.log(`Error => ${err}`)
-  }
+
+  const goldRes = await getGoldPrices()
+  //  const BASE_URL = process.env.BASE_URL_PROD;
+  // console.log(`res => https://${BASE_URL}/api/gold`);
+  // let goldRes;
+  // try {
+  //   goldRes = await axios.get(`https://${BASE_URL}/api/gold`);
+  //   console.log(`result ${res}`);
+  // } catch(err) {
+  //   console.log(`Error => ${err}`)
+  // }
   return {
     props: {
       goldPrices: goldRes?.data ?? [],
