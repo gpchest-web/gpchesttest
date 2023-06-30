@@ -4,7 +4,7 @@ let dev = process.env.NODE_ENV !== "production";
 const DEV_BASE_URL = process.env.BASE_URL_DEV;
 const PROD_BASE_URL = process.env.BASE_URL_PROD;
 
-const BASE_URL = dev ? DEV_BASE_URL : PROD_BASE_URL;
+const BASE_URL = `https://${dev ? DEV_BASE_URL : PROD_BASE_URL}`;
 
 export const createPost = async (form) => {
   try {
@@ -53,11 +53,12 @@ export const createGoldPrice = async (form) => {
 };
 
 export const getGoldPrices = async () => {
-  
   try {
-    const res = await axios.get(`https://gpchesttest.vercel.app/api/gold`);
+    const res = await axios.get(`${BASE_URL}/api/gold`);
+    console.log(`res => ${res}`)
     return res;
   } catch (err) {
+    console.log(`Error => ${err}`)
     return err.response;
   }
 };
